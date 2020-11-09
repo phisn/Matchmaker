@@ -34,17 +34,6 @@ namespace Matchmaker.Logic
             }
         }
 
-        public static bool TryFromString(ref TeamColor color, string stringColor)
-        {
-            TeamColor? newColor = FromString(stringColor);
-
-            if (newColor == null)
-                return false;
-
-            color = newColor.Value;
-            return true;
-        }
-
         public static TeamColor Opposite(this TeamColor teamColor)
         {
             return teamColor == TeamColor.Blue
