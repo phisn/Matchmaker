@@ -21,10 +21,16 @@ namespace Matchmaker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<double>("Mean")
+                        .HasColumnType("REAL");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("Score")
+                    b.Property<double>("Rating")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("StandardDeviation")
                         .HasColumnType("REAL");
 
                     b.HasKey("ParticipantId");

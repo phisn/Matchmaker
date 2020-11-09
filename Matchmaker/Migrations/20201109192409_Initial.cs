@@ -12,8 +12,10 @@ namespace Matchmaker.Migrations
                 {
                     ParticipantId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Score = table.Column<float>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Mean = table.Column<double>(nullable: false),
+                    StandardDeviation = table.Column<double>(nullable: false),
+                    Rating = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Matchmaker.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20201101132955_Initial")]
+    [Migration("20201109192409_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,10 +23,16 @@ namespace Matchmaker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<double>("Mean")
+                        .HasColumnType("REAL");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("Score")
+                    b.Property<double>("Rating")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("StandardDeviation")
                         .HasColumnType("REAL");
 
                     b.HasKey("ParticipantId");
