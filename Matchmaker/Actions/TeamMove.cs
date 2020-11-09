@@ -25,15 +25,17 @@ namespace Matchmaker.Actions
                 return false;
             }
 
-            TeamColor color = TeamColor.Blue;
-            if (!TeamColorExtensions.TryFromString(ref arguments[1]))
+            TeamColor? color = TeamColorExtensions.FromString(arguments[1]);
+
+            if (!color.HasValue)
             {
                 Console.WriteLine("Color not found");
                 return false;
             }
 
-            TryRemoveParticipantFromOtherTeam(participant, color);
-            Teams.ByColor(color).Participants.Add(participant);
+
+            TryRemoveParticipantFromOtherTeam(participant, color.Value);
+            Teams.ByColor(color.Value).Participants.Add(participant.ParticipantId);
 
             return true;
         }
@@ -41,7 +43,7 @@ namespace Matchmaker.Actions
         private static void TryRemoveParticipantFromOtherTeam(Participant participant, TeamColor color)
         {
             Teams.ByColor(color.Opposite()).Participants.RemoveAll(
-                (p) => p.ParticipantId == participant.ParticipantId);
+                (p) => p == participant.ParticipantId);
         }
     }
 }

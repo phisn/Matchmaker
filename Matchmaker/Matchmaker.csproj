@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\Skills\Skills.csproj" />
   </ItemGroup>
 
 </Project>

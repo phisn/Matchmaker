@@ -35,9 +35,16 @@ namespace Matchmaker.Actions
                 context.Participants.Add(new Participant
                 {
                     Name = arguments[0],
-                    Score = arguments.Length == 2
+                    Mean = arguments.Length == 2
                         ? score
-                        : Participant.DefaultScore
+                        : Participant.DefaultMean,
+                    StandardDeviation = arguments.Length == 2
+                        ? score / 3.0
+                        : Participant.DefaultStandardDeviation,
+                    Rating = arguments.Length == 2
+                        ? new Moserware.Skills.Rating(
+                            score, score / 3.0).ConservativeRating
+                        : Participant.DefaultStandardDeviation
                 });
 
                 context.SaveChanges();

@@ -31,9 +31,13 @@ namespace Matchmaker.Actions
         {
             if (team.Participants.Count > 0)
             {
-                for (int i = 0; i < team.Participants.Count; ++i)
+                using (Context context = new Context())
                 {
-                    Console.WriteLine("{0, 2} {1, -20} {2, 5:} score", i, $"{team.Participants[i].Name}#{team.Participants[i].ParticipantId}", team.Participants[i].Score);
+                    for (int i = 0; i < team.Participants.Count; ++i)
+                    {
+                        Participant p = context.Participants.Find(team.Participants[i]);
+                        Console.WriteLine("{0, 2} {1, -20} {2, 5:} score", i, $"{p.Name}#{p.ParticipantId}", p.Rating);
+                    }
                 }
             }
             else

@@ -27,12 +27,12 @@ namespace Matchmaker.Actions
                 return false;
             }
 
-            if (Teams.Blue.Participants.RemoveAll((p) => p.ParticipantId == participant.ParticipantId) > 0)
+            if (Teams.Blue.Participants.RemoveAll((p) => p == participant.ParticipantId) > 0)
             {
                 return true;
             }
 
-            if (Teams.Red.Participants.RemoveAll((p) => p.ParticipantId == participant.ParticipantId) > 0)
+            if (Teams.Red.Participants.RemoveAll((p) => p == participant.ParticipantId) > 0)
             {
                 return true;
             }
