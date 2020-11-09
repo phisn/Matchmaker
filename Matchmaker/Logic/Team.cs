@@ -6,6 +6,6 @@ namespace Matchmaker.Logic
 {
     public class Team
     {
-        public List<Participant> Participants { get; set; } = new List<Participant>();
+        public List<int> Participants { get; set; } = new List<int>();
     }
 }
