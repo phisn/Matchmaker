@@ -21,16 +21,22 @@ namespace Matchmaker
 
     public class Participant
     {
-        public static int DefaultScore { get; } = 1000;
+        public static double DefaultMean { get; } = 25.0;
+        public static double DefaultStandardDeviation { get; } = 25.0 / 3.0;
 
         public Participant()
         {
-            Score = DefaultScore;
+            Mean = DefaultMean;
+            StandardDeviation = DefaultStandardDeviation;
+            Rating = 0;
         }
 
         public int ParticipantId { get; set; }
-        public float Score { get; set; }
         public string Name { get; set; }
+
+        public double Mean { get; set; }
+        public double StandardDeviation { get; set; }
+        public double Rating { get; set; }
 
         public static Participant FindParticipantByString(string participantName)
         {
@@ -38,7 +44,7 @@ namespace Matchmaker
             {
                 Participant participant = context.Participants
                     .Where((p) => p.Name == participantName.ToLower())
-                    .First();
+                    .FirstOrDefault();
 
                 if (participant != null)
                     return participant;
