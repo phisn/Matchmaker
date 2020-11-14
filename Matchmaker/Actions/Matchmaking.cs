@@ -46,7 +46,8 @@ namespace Matchmaker.Actions
 
             allTeams = allTeams.OrderBy((t) =>
             {
-                return Math.Abs(t.Key.Sum((p) => p.Rating) - t.Value.Sum((p) => p.Rating));
+                return Math.Abs(0.5 - Team.GetScoreFor(t.Key, t.Value));
+
             }).ToList();
 
             KeyValuePair<List<Participant>, List<Participant>> result = SelectTeam(allTeams);
