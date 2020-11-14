@@ -1,6 +1,7 @@
 ﻿using Matchmaker.Logic;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Matchmaker.Actions
@@ -18,10 +19,11 @@ namespace Matchmaker.Actions
                 return false;
             }
 
-            Console.WriteLine("Team Blue:");
+            double redScore = Teams.GetCurrentScoreForRed();
+            Console.WriteLine($"Team Blue: (win { (redScore * 100):F1}%)");
             PrintTeamParticipants(Teams.Blue);
 
-            Console.WriteLine("\nTeam Red:");
+            Console.WriteLine($"\nTeam Red: (win { ((1 - redScore) * 100):F1}%)");
             PrintTeamParticipants(Teams.Red);
 
             return true;
