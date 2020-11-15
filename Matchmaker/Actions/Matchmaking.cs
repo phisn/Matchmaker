@@ -46,7 +46,7 @@ namespace Matchmaker.Actions
 
             allTeams = allTeams.OrderBy((t) =>
             {
-                return 1.0 - Team.GetScoreFor(t.Key, t.Value);
+                return 1.0 - Team.GetRatingFor(t.Key, t.Value);
 
             }).ToList();
 
