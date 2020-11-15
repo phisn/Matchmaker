@@ -27,18 +27,14 @@ namespace Matchmaker.Actions
                 return false;
             }
 
-            if (Teams.Blue.Participants.RemoveAll((p) => p == participant.ParticipantId) > 0)
-            {
+            if (Teams.Blue.Participants.Remove(participant.ParticipantId))
                 return true;
-            }
 
-            if (Teams.Red.Participants.RemoveAll((p) => p == participant.ParticipantId) > 0)
-            {
+            if (Teams.Red.Participants.Remove(participant.ParticipantId))
                 return true;
-            }
 
             Console.WriteLine("Participant not found in teams");
-            return false;
+            return true;
         }
     }
 }
