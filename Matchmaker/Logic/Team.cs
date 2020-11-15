@@ -9,6 +9,20 @@ namespace Matchmaker.Logic
     {
         public static double GetRatingFor(List<Participant> redPlayers, List<Participant> bluePlayers)
         {
+            return TrueSkillCalculator.CalculateMatchQuality(
+                GameInfo.DefaultGameInfo,
+                ConvertToMoserware(bluePlayers, redPlayers));
+        }
+
+        public static double GetRatingFor(IEnumerable<IDictionary<Player, Rating>> teams)
+        {
+            return TrueSkillCalculator.CalculateMatchQuality(
+                GameInfo.DefaultGameInfo,
+                teams);
+        }
+
+        public static IEnumerable<IDictionary<Player, Rating>> ConvertToMoserware(List<Participant> redPlayers, List<Participant> bluePlayers)
+        {
             var redTeam = new Moserware.Skills.Team();
 
             foreach (Participant participant in redPlayers)
@@ -31,9 +45,7 @@ namespace Matchmaker.Logic
                         participant.StandardDeviation));
             }
 
-            return TrueSkillCalculator.CalculateMatchQuality(
-                GameInfo.DefaultGameInfo,
-                Moserware.Skills.Teams.Concat(blueTeam, redTeam));
+            return Moserware.Skills.Teams.Concat(blueTeam, redTeam);
         }
 
         public List<int> Participants { get; set; } = new List<int>();
