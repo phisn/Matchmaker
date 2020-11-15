@@ -12,7 +12,23 @@ namespace Matchmaker.Actions
 
         public override bool Call(string[] arguments)
         {
-            return false;
+            if (arguments.Length != 1)
+            {
+                return false;
+            }
+
+            Participant participant = Participant.FindParticipantByString(arguments[0]);
+
+            if (participant == null)
+            {
+                Console.WriteLine("Participant not found");
+            }
+            else
+            {
+                Console.WriteLine($"Score: [{participant.Rating}] Mean: [{participant.Mean}] SD: [{participant.StandardDeviation}]");
+            }
+
+            return true;
         }
     }
 }
