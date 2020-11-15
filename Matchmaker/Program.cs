@@ -21,6 +21,9 @@ namespace Matchmaker
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("Matchmaker for small teams using TrueSkill");
+            Console.WriteLine("Type 'help' for help");
+
             Type actionType = typeof(Actions.Action);
             actions = actionType.Assembly.GetTypes()
                 .Where(type => type.IsSubclassOf(actionType))
