@@ -7,7 +7,7 @@ namespace Matchmaker.Logic
 {
     public class Team
     {
-        public static double GetScoreFor(List<Participant> redPlayers, List<Participant> bluePlayers)
+        public static double GetRatingFor(List<Participant> redPlayers, List<Participant> bluePlayers)
         {
             var redTeam = new Moserware.Skills.Team();
 

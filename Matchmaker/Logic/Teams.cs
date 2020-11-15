@@ -10,7 +10,7 @@ namespace Matchmaker.Logic
         public static Team ByColor(TeamColor color)
             => color == TeamColor.Blue ? Blue : Red;
 
-        public static double GetCurrentScoreForRed()
+        public static double GetCurrentTeamRating()
         {
             using (Context context = new Context())
             {
@@ -21,7 +21,7 @@ namespace Matchmaker.Logic
                     .Select(p => context.Participants.Find(p))
                     .ToList();
 
-                return Team.GetScoreFor(red, blue);
+                return Team.GetRatingFor(red, blue);
             }
         }
 
