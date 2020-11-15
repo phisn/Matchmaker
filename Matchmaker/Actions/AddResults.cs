@@ -28,37 +28,9 @@ namespace Matchmaker.Actions
                 return false;
             }
 
-            var redTeam = new Moserware.Skills.Team();
-            var blueTeam = new Moserware.Skills.Team();
-
-            using (Context context = new Context())
-            {
-                foreach (int i in Matchmaker.Logic.Teams.Red.Participants)
-                {
-                    Participant participant = context.Participants.Find(i);
-                    redTeam.AddPlayer(
-                        new Player(participant.ParticipantId),
-                        new Rating(
-                            participant.Mean,
-                            participant.StandardDeviation));
-                }
-
-                foreach (int i in Matchmaker.Logic.Teams.Blue.Participants)
-                {
-                    Participant participant = context.Participants.Find(i);
-                    blueTeam.AddPlayer(
-                        new Player(participant.ParticipantId),
-                        new Rating(
-                            participant.Mean,
-                            participant.StandardDeviation));
-                }
-            }
-
             IDictionary<Player, Rating> newRating = TrueSkillCalculator.CalculateNewRatings(
                 GameInfo.DefaultGameInfo,
-                Moserware.Skills.Teams.Concat(
-                    redTeam,
-                    blueTeam),
+                Matchmaker.Logic.Teams.ConvertToMoserware(),
                 color.Value == TeamColor.Blue ? 2 : 1,
                 color.Value == TeamColor.Blue ? 1 : 2);
 
@@ -75,8 +47,6 @@ namespace Matchmaker.Actions
                         continue;
                     }
 
-                    Console.WriteLine($"Player {participant.Name}: rating({player.Value.ConservativeRating}) Old [mean({participant.Mean}) sd({participant.StandardDeviation})] New [mean({player.Value.Mean}) sd({player.Value.StandardDeviation})]");
-
                     participant.Mean = player.Value.Mean;
                     participant.StandardDeviation = player.Value.StandardDeviation;
                     participant.Rating = player.Value.ConservativeRating;
@@ -85,6 +55,7 @@ namespace Matchmaker.Actions
                 context.SaveChanges();
             }
 
+            Console.WriteLine("Updated rating for all players");
 
             return true;
         }
