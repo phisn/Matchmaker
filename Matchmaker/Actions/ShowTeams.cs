@@ -19,11 +19,11 @@ namespace Matchmaker.Actions
                 return false;
             }
 
-            double redScore = Teams.GetCurrentScoreForRed();
-            Console.WriteLine($"Team Blue: (win { (redScore * 100):F1}%)");
+            Console.WriteLine($"Draw propability: {Teams.GetCurrentTeamRating():F2}%");
+            Console.WriteLine($"Team Blue: ");
             PrintTeamParticipants(Teams.Blue);
 
-            Console.WriteLine($"\nTeam Red: (win { ((1 - redScore) * 100):F1}%)");
+            Console.WriteLine($"\nTeam Red: ");
             PrintTeamParticipants(Teams.Red);
 
             return true;
@@ -38,7 +38,7 @@ namespace Matchmaker.Actions
                     for (int i = 0; i < team.Participants.Count; ++i)
                     {
                         Participant p = context.Participants.Find(team.Participants[i]);
-                        Console.WriteLine("{0, 2} {1, -20} {2, 5:} score", i, $"{p.Name}#{p.ParticipantId}", p.Rating);
+                        Console.WriteLine("{0, 2} {1, -20} {2, 6:F2} score", i, $"{p.Name}#{p.ParticipantId}", p.Rating);
                     }
                 }
             }
