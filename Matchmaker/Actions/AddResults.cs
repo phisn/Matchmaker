@@ -31,8 +31,8 @@ namespace Matchmaker.Actions
             IDictionary<Player, Rating> newRating = TrueSkillCalculator.CalculateNewRatings(
                 GameInfo.DefaultGameInfo,
                 Matchmaker.Logic.Teams.ConvertToMoserware(),
-                color.Value == TeamColor.Blue ? 2 : 1,
-                color.Value == TeamColor.Blue ? 1 : 2);
+                color.Value is TeamColor.Blue ? 1 : 2,
+                color.Value is TeamColor.Red ? 1 : 2);
 
             using (Context context = new Context())
             {
